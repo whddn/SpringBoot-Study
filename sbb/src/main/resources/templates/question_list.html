@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko"
-      xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <div layout:fragment="content" class="container my-3">
     <table class="table">
@@ -20,7 +10,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="question, loop : ${questionList}">
+        <tr th:each="question, loop : ${paging}">
             <td th:text="${loop.count}"></td>
             <td>
                 <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
@@ -29,6 +19,7 @@
         </tr>
         </tbody>
     </table>
+    <a th:href="@{/question/create}" class="btn btn-dark">질문 등록하기</a>
 </div>
 </html>
 
