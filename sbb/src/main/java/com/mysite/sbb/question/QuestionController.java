@@ -15,7 +15,7 @@ import com.mysite.sbb.answer.AnswerForm;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Page;import java.security.Principal;
 import com.mysite.sbb.user.SiteUser;
-import com.mysite.sbb.user.UserService;
+import com.mysite.sbb.user.UserService;import org.springframework.security.access.prepost.PreAuthorize;
 
 @RequestMapping("/question")
 @RequiredArgsConstructor
@@ -37,11 +37,13 @@ public class QuestionController {
         model.addAttribute("question", question);
         return "question_detail";
     }
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")
     public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
     public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
